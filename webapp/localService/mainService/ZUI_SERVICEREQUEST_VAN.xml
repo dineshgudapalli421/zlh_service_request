@@ -117,38 +117,59 @@
                     </Collection>
                 </Annotation>
             </Annotations>
+            <Annotations Target="cds_zwm_servicerequest.ServiceRequestType/ServiceObjectType">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zwm_servicerequest.ServiceRequestType/ServiceDocumentIsReleased">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zwm_servicerequest.ServiceRequestType/ServiceDocumentHasError">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zwm_servicerequest.ServiceRequestType/ServiceDocumentIsRejected">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zwm_servicerequest.ServiceRequestType/ServiceDocumentIsOpen">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zwm_servicerequest.ServiceRequestType/NmbrOfSrvcReqNew">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zwm_servicerequest.ServiceRequestType/NmbrOfSrvcReqInProcess">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zwm_servicerequest.ServiceRequestType/NmbrOfSrvcReqComplete">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zwm_servicerequest.ServiceRequestType/NmbrOfSrvcReq">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zwm_servicerequest.ServiceRequestType/CalendarQuarter">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zwm_servicerequest.ServiceRequestType/CalendarMonth">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zwm_servicerequest.ServiceRequestType/CalendarYear">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
             <Annotations Target="cds_zwm_servicerequest.ServiceRequestType">
-                <Annotation Term="UI.Chart" Qualifier="BySalesOrganization">
-                    <Record Type="UI.ChartDefinitionType">
-                        <PropertyValue Property="Title" String="Contracts Expiring by Sales Org"/>
-                        <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Column"/>
-                        <PropertyValue Property="Dimensions">
-                            <Collection>
-                                <PropertyPath>ServiceTeam</PropertyPath>
-                            </Collection>
-                        </PropertyValue>
-                        <PropertyValue Property="DimensionAttributes">
-                            <Collection>
-                                <Record Type="UI.ChartDimensionAttributeType">
-                                    <PropertyValue Property="Dimension" PropertyPath="ServiceTeam"/>
-                                    <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Series"/>
-                                </Record>
-                            </Collection>
-                        </PropertyValue>
-                        <PropertyValue Property="Measures">
-                            <Collection>
-                                <PropertyPath>NmbrOfSrvcReq</PropertyPath>
-                            </Collection>
-                        </PropertyValue>
-                        <PropertyValue Property="MeasureAttributes">
-                            <Collection>
-                                <Record Type="UI.ChartMeasureAttributeType">
-                                    <PropertyValue Property="Measure" PropertyPath="NmbrOfSrvcReq"/>
-                                    <PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
-                                </Record>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="Address"/>
+                            <PropertyValue Property="ID" String="AddressFacet"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="Adress Details"/>
+                                        <PropertyValue Property="ID" String="Address"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.Identification#Address"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                    </Collection>
                 </Annotation>
                 <Annotation Term="UI.HeaderInfo">
                     <Record>
@@ -177,23 +198,23 @@
                             <PropertyValue Property="Value" Path="PostingDate"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Priority"/>
-                            <PropertyValue Property="Value" Path="ServiceDocumentPriority"/>
-                        </Record>
-                        <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="Partner"/>
                             <PropertyValue Property="Value" Path="SoldToParty"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Status"/>
+                            <PropertyValue Property="Label" String="Request Status"/>
                             <PropertyValue Property="Value" Path="ServiceDocumentStatus"/>
                         </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Service Type"/>
-                            <PropertyValue Property="Value" Path="SuccessorDocumentType"/>
+                        <Record Type="UI.DataFieldWithIntentBasedNavigation">
+                            <PropertyValue Property="Label" String="Service Quotation"/>
+                            <PropertyValue Property="SemanticObject" String="ServiceQuotation"/>
+                            <PropertyValue Property="Action" String="display"/>
+                            <PropertyValue Property="Value" Path="ServiceQuotation"/>
                         </Record>
-                        <Record Type="UI.DataField">
+                        <Record Type="UI.DataFieldWithIntentBasedNavigation">
                             <PropertyValue Property="Label" String="Service Order"/>
+                            <PropertyValue Property="SemanticObject" String="ServiceOrder"/>
+                            <PropertyValue Property="Action" String="display"/>
                             <PropertyValue Property="Value" Path="ServiceOrder"/>
                         </Record>
                         <Record Type="UI.DataField">
@@ -203,26 +224,6 @@
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="Service Organization"/>
                             <PropertyValue Property="Value" Path="ServiceOrganization"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Postal Code"/>
-                            <PropertyValue Property="Value" Path="PostalCode"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="City"/>
-                            <PropertyValue Property="Value" Path="CityName"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Street Name"/>
-                            <PropertyValue Property="Value" Path="StreetName"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="House Number"/>
-                            <PropertyValue Property="Value" Path="HouseNumber"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Device Location"/>
-                            <PropertyValue Property="Value" Path="DeviceLocation"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="Meter Number"/>
@@ -265,84 +266,76 @@
                             <PropertyValue Property="Value" Path="ResponsibleEmployee"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="ServiceObjectType"/>
-                            <Annotation Term="UI.Hidden"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="ServiceDocumentIsReleased"/>
-                            <Annotation Term="UI.Hidden"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="ServiceDocumentHasError"/>
-                            <Annotation Term="UI.Hidden"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="ServiceDocumentIsRejected"/>
-                            <Annotation Term="UI.Hidden"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="ServiceDocumentIsOpen"/>
-                            <Annotation Term="UI.Hidden"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="NmbrOfSrvcReqNew"/>
-                            <Annotation Term="UI.Hidden"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="NmbrOfSrvcReqInProcess"/>
-                            <Annotation Term="UI.Hidden"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="NmbrOfSrvcReqComplete"/>
-                            <Annotation Term="UI.Hidden"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="NmbrOfSrvcReq"/>
-                            <Annotation Term="UI.Hidden"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="CalendarQuarter"/>
-                            <Annotation Term="UI.Hidden"/>
+                            <PropertyValue Property="Label" String="Priority"/>
+                            <PropertyValue Property="Value" Path="ServiceDocumentPriority"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="CalendarQuarterName"/>
                             <Annotation Term="UI.Hidden"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="CalendarMonth"/>
-                            <Annotation Term="UI.Hidden"/>
-                        </Record>
-                        <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="CalendarMonthName"/>
-                            <Annotation Term="UI.Hidden"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="CalendarYear"/>
                             <Annotation Term="UI.Hidden"/>
                         </Record>
                     </Collection>
                 </Annotation>
-                <Annotation Term="UI.PresentationVariant">
-                    <Record>
-                        <PropertyValue Property="SortOrder">
-                            <Collection>
-                                <Record Type="Common.SortOrderType">
-                                    <PropertyValue Property="Property" PropertyPath="PostingDate"/>
-                                    <PropertyValue Property="Descending" Bool="true"/>
-                                </Record>
-                            </Collection>
-                        </PropertyValue>
-                        <PropertyValue Property="Visualizations">
-                            <Collection>
-                                <AnnotationPath>@UI.LineItem</AnnotationPath>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
+                <Annotation Term="UI.LineItem" Qualifier="Address">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Device Location"/>
+                            <PropertyValue Property="Value" Path="DeviceLocation"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="House Number"/>
+                            <PropertyValue Property="Value" Path="HouseNumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Street Name"/>
+                            <PropertyValue Property="Value" Path="StreetName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="City"/>
+                            <PropertyValue Property="Value" Path="CityName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Postal Code"/>
+                            <PropertyValue Property="Value" Path="PostalCode"/>
+                        </Record>
+                    </Collection>
                 </Annotation>
                 <Annotation Term="UI.SelectionFields">
                     <Collection>
                         <PropertyPath>ServiceRequest</PropertyPath>
+                        <PropertyPath>ServiceTeam</PropertyPath>
                         <PropertyPath>SoldToParty</PropertyPath>
+                        <PropertyPath>PostingDate</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zwm_servicerequest.ZI_ServiceTeamVHType/BusinessPartnerName">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zwm_servicerequest.ZI_ServiceTeamVHType/BusinessPartnerRole">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zwm_servicerequest.ZI_WM_ServiceDocRequestVHType/ServiceObjectType">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zwm_servicerequest.ZI_WM_ServiceDocRequestVHType">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ServiceRequest"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ServiceDocumentType"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>ServiceRequest</PropertyPath>
+                        <PropertyPath>ServiceDocumentType</PropertyPath>
                     </Collection>
                 </Annotation>
             </Annotations>

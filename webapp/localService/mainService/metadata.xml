@@ -74,7 +74,7 @@
                     <PropertyRef Name="ServiceRequest"/>
                 </Key>
                 <Property Name="ServiceObjectType" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Trans. Cat." sap:quickinfo="Business Trans. Cat."/>
-                <Property Name="ServiceRequest" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Transaction ID"/>
+                <Property Name="ServiceRequest" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Transaction ID" sap:value-list="standard"/>
                 <Property Name="ServiceDocumentType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:text="ServiceDocumentTypeShortName" sap:label="Transaction Type" sap:quickinfo="Business Transaction Type"/>
                 <Property Name="ServiceDocumentTypeShortName" Type="Edm.String" MaxLength="20" sap:label="Short Description" sap:quickinfo="Description (20 Characters)"/>
                 <Property Name="ServiceDocumentDescription" Type="Edm.String" MaxLength="40" sap:label="RequestDescription" sap:quickinfo="Transaction Description"/>
@@ -87,7 +87,7 @@
                 <Property Name="ServiceDocumentPriority" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative" sap:label="Priority" sap:quickinfo="Activity Priority"/>
                 <Property Name="SoldToParty" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:text="BusinessPartnerName" sap:label="Sold-To Party" sap:value-list="standard"/>
                 <Property Name="BusinessPartnerName" Type="Edm.String" MaxLength="81" sap:label="Business Partner Name" sap:quickinfo="BUSINESS PARTNER NAME"/>
-                <Property Name="ServiceTeam" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:text="ServiceTeamName" sap:label="Service Team"/>
+                <Property Name="ServiceTeam" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:text="ServiceTeamName" sap:label="Service Team" sap:value-list="standard"/>
                 <Property Name="ServiceTeamName" Type="Edm.String" MaxLength="81" sap:label="Business Partner Name" sap:quickinfo="BUSINESS PARTNER NAME"/>
                 <Property Name="ResponsibleEmployee" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Employee Responsible"/>
                 <Property Name="ServiceEmployee" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Exec.Service Emp." sap:quickinfo="Executing Service Employee"/>
@@ -111,7 +111,7 @@
                 <Property Name="ResponsibleServiceOrganization" Type="Edm.String" MaxLength="14" sap:display-format="UpperCase" sap:text="OrganizationalUnitShortName" sap:label="OU (Service)" sap:quickinfo="Organizational Unit (Service)"/>
                 <Property Name="OrganizationalUnitShortName" Type="Edm.String" MaxLength="12" sap:label="Object abbreviation" sap:quickinfo="Object Abbreviation"/>
                 <Property Name="ServiceOrder" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Transaction ID"/>
-                <Property Name="SuccessorDocumentType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Transaction Type" sap:quickinfo="Business Transaction Type"/>
+                <Property Name="ServiceQuotation" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Transaction ID"/>
                 <Property Name="NmbrOfSrvcReqNew" Type="Edm.Int32"/>
                 <Property Name="NmbrOfSrvcReqInProcess" Type="Edm.Int32"/>
                 <Property Name="NmbrOfSrvcReqComplete" Type="Edm.Int32"/>
@@ -121,6 +121,26 @@
                 <Property Name="CalendarMonth" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative" sap:text="CalendarMonthName" sap:label="Calendar Month"/>
                 <Property Name="CalendarMonthName" Type="Edm.String" MaxLength="60" sap:label="Short Description" sap:quickinfo="Short Text for Fixed Values"/>
                 <Property Name="CalendarYear" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Calendar Year"/>
+            </EntityType>
+            <EntityType Name="ZI_ServiceTeamVHType" sap:label="Service Team" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="BusinessPartner"/>
+                </Key>
+                <Property Name="BusinessPartner" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:text="BusinessPartnerName" sap:label="Business Partner" sap:quickinfo="Business Partner Number"/>
+                <Property Name="BusinessPartnerName" Type="Edm.String" MaxLength="81" sap:label="Business Partner Name"/>
+                <Property Name="BusinessPartnerCategory" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Business Partner Category"/>
+                <Property Name="BusinessPartnerRole" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="BP Role"/>
+            </EntityType>
+            <EntityType Name="ZI_WM_ServiceDocRequestVHType" sap:label="Value help for Sevice Request" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ServiceObjectType"/>
+                    <PropertyRef Name="ServiceRequest"/>
+                    <PropertyRef Name="ServiceDocumentType"/>
+                </Key>
+                <Property Name="ServiceObjectType" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Trans. Cat." sap:quickinfo="Business Trans. Cat."/>
+                <Property Name="ServiceRequest" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Transaction ID"/>
+                <Property Name="ServiceDocumentType" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Transaction Type" sap:quickinfo="Business Transaction Type"/>
+                <Property Name="ServiceDocumentDescription" Type="Edm.String" MaxLength="40" sap:label="Transaction Descr." sap:quickinfo="Transaction Description"/>
             </EntityType>
             <EntityType Name="SAP__Currency" sap:content-version="1">
                 <Key>
@@ -361,6 +381,8 @@
                 <EntitySet Name="SAP__ValueHelpSet" EntityType="cds_zwm_servicerequest.SAP__ValueHelp" sap:content-version="1"/>
                 <EntitySet Name="I_BusinessPartnerVH" EntityType="cds_zwm_servicerequest.I_BusinessPartnerVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="ServiceRequest" EntityType="cds_zwm_servicerequest.ServiceRequestType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZI_ServiceTeamVH" EntityType="cds_zwm_servicerequest.ZI_ServiceTeamVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="ZI_WM_ServiceDocRequestVH" EntityType="cds_zwm_servicerequest.ZI_WM_ServiceDocRequestVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="SAP__Currencies" EntityType="cds_zwm_servicerequest.SAP__Currency" sap:content-version="1"/>
                 <EntitySet Name="SAP__UnitsOfMeasure" EntityType="cds_zwm_servicerequest.SAP__UnitOfMeasure" sap:content-version="1"/>
                 <EntitySet Name="SAP__MyDocumentDescriptions" EntityType="cds_zwm_servicerequest.SAP__DocumentDescription" sap:content-version="1"/>
@@ -398,6 +420,30 @@
                 </AssociationSet>
             </EntityContainer>
             <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <Annotations Target="cds_zwm_servicerequest.ServiceRequestType/ServiceRequest" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Transaction ID"/>
+                        <PropertyValue Property="CollectionPath" String="ZI_WM_ServiceDocRequestVH"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ServiceRequest"/>
+                                    <PropertyValue Property="ValueListProperty" String="ServiceRequest"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ServiceDocumentType"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ServiceDocumentDescription"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.SemanticObject" String="ServiceRequest"/>
+            </Annotations>
             <Annotations Target="cds_zwm_servicerequest.ServiceRequestType/SoldToParty" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ValueList">
                     <Record>
@@ -452,11 +498,37 @@
                     </Record>
                 </Annotation>
             </Annotations>
+            <Annotations Target="cds_zwm_servicerequest.ServiceRequestType/ServiceTeam" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Service Team"/>
+                        <PropertyValue Property="CollectionPath" String="ZI_ServiceTeamVH"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ServiceTeam"/>
+                                    <PropertyValue Property="ValueListProperty" String="BusinessPartner"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="BusinessPartnerName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="BusinessPartnerCategory"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
             <Annotations Target="cds_zwm_servicerequest.cds_zwm_servicerequest_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
             </Annotations>
-            <Annotations Target="cds_zwm_servicerequest.ServiceRequestType/ServiceRequest" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.SemanticObject" String="ServiceRequest"/>
+            <Annotations Target="cds_zwm_servicerequest.ServiceRequestType/ServiceOrder" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.SemanticObject" String="ServiceOrder"/>
+            </Annotations>
+            <Annotations Target="cds_zwm_servicerequest.ServiceRequestType/ServiceQuotation" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.SemanticObject" String="ServiceQuotation"/>
             </Annotations>
             <Annotations Target="cds_zwm_servicerequest.cds_zwm_servicerequest_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Org.OData.Capabilities.V1.BatchSupport">
