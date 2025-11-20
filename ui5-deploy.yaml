@@ -20,6 +20,6 @@ builder:
           name: ZLH_SERVICE_REQ
           description: Service Request - MSO
           package: ZFIORI
-          transport: SDVK912860
+          transport: SDVK913132
         exclude:
           - /test/
